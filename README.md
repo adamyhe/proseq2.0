@@ -3,10 +3,6 @@ Preprocesses and Aligns Run-On Sequencing (PRO/GRO/ChRO-seq) data from Single-Re
 
 Currently we provide two commands: proseq mapper and bigWig merge.
 
-# MULTITHREADING:
-
-This is a fork of the original [proseq2.0](https://github.com/Danko-Lab/proseq2.0.git) repo. This package 1) multithreads cutadapt and 2) executes all commands in `./proseq2.0.bsh` sequentially in the main shell (no farming out commands to the background with `&`. This should fix an issue in the original proseq2.0 where the script would randomly hang on the `wait` lines.
-
 ## Overview
 Our proseq2.0 pipeline will take single-end or paired-end sequencing reads in fastq.gz format as input. The pipeline will automate three routine pre-processing and alignment options, including
 + pre-processing reads: remove the adapter sequence and quality trim the reads (cutadapt), deduplicate the reads if UMI barcodes are used (prinseq-lite.pl)
@@ -217,4 +213,10 @@ Here is an examples to generate the bigWig for dREG.
 ```
 bash proseq2.0.bsh -SE -G -4DREG -i $dog_genome -c $dog_chinfo -I ./example1_R1  -T ./tmpdir -O ./outputdir
 ```
+
+
+## Fix to tee / wait bug.
+
+A recent linux update introduced an incompatibility between tee and wait. The main wrapper `proseq2.0.bsh` has been updated to resolve this bug. The older wrapper is retained as `proseq2.0_old.bsh`
+
 
