@@ -847,7 +847,7 @@ for f in ${TMPDIR}/*.sort.bam
    echo ${readCount} >> ${OUTPUT}/${j}.align.log
 
    ## Remove rRNA and reverse the strand (PRO-seq).
-   zcat ${TMPDIR}/$j.bed.gz | grep "rRNA\|chrM" -v | grep "_" -v | sort-bed - | gzip > ${TMPDIR}/$j.nr.rs.bed.gz
+   zcat ${TMPDIR}/$j.bed.gz | grep "U13369.1|rDNA|rRNA|chrM|_" -Ev | sort-bed - | gzip > ${TMPDIR}/$j.nr.rs.bed.gz
    echo 'Number of mappable reads (excluding rRNA):' >> ${OUTPUT}/${j}.align.log
    echo `zcat ${TMPDIR}/$j.nr.rs.bed.gz | grep "" -c` >> ${OUTPUT}/${j}.align.log
 
@@ -1099,7 +1099,7 @@ for f in ${TMPDIR}/*.sort.bam
    echo ${readCount} >> ${OUTPUT}/${j}.align.log
 
    ## Remove rRNA and reverse the strand (PRO-seq).
-   zcat ${TMPDIR}/$j.bed.gz | grep "rRNA\|chrM" -v | grep "_" -v | sort-bed - | gzip > ${TMPDIR}/$j.nr.rs.bed.gz
+   zcat ${TMPDIR}/$j.bed.gz | grep "U13369.1|rDNA|rRNA|chrM|_" -Ev | sort-bed - | gzip > ${TMPDIR}/$j.nr.rs.bed.gz
    echo 'Number of mappable reads (excluding rRNA):' >> ${OUTPUT}/${j}.align.log
    echo `zcat ${TMPDIR}/$j.nr.rs.bed.gz | grep "" -c` >> ${OUTPUT}/${j}.align.log
 
